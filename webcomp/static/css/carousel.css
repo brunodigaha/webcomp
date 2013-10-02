@@ -1,0 +1,128 @@
+/ * ESTILOS GLOBAL
+-------------------------------------------------- * /
+/ * Preenchimento abaixo o corpo do texto de rodapé e mais leve * /
+
+body {
+  padding-bottom: 40px;
+  color: # 5a5a5a;
+}
+
+
+
+/ * Personalizar a barra de navegação
+-------------------------------------------------- * /
+
+/ * Class Especial de container. Circundante. Barra de navegação, utilizado para posicioná-la no lugar. * /
+. Navbar-wrapper {
+  position: relative;
+  z-index: 15;
+}
+
+
+/ * Personalizar a CARROSSEL
+-------------------------------------------------- * /
+
+/ * Carousel classe base * /
+. Carrossel {
+  margin-bottom: 60px;
+
+  / * Margem negativa para puxar para cima carrossel. 90px é aproximadamente margens e altura da barra de navegação. * /
+  margin-top:-90px;
+}
+/ * Desde o posicionamento da imagem, é preciso ajudar a legenda * /
+. Carrossel-caption {
+  z-index: 10;
+}
+
+/ * Declare alturas por causa do posicionamento do elemento img * /
+. Carrossel. Artigo {
+  height: 500px;
+  background-color: # 777;
+}
+. Carrossel interno>. Item> img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+
+
+/ * Marketing de Conteúdo
+-------------------------------------------------- * /
+
+/ * Pad as bordas das vistas móveis um pouco * /
+. Comercialização {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/ * Centro de alinhar o texto dentro das três colunas abaixo do carrossel * /
+. Marketing. Col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+. Comercialização h2 {
+  font-weight: normal;
+}
+. Marketing. Col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+/ * Featurettes
+------------------------- * /
+
+. Featurette divisor {
+  margin: 80px 0; / * espaço o <hr> Bootstrap mais * /
+}
+
+/ * Diluir os títulos de marketing * /
+. Featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing:-1px;
+}
+
+
+
+/ * CSS RESPONSIVE
+-------------------------------------------------- * /
+
+@ Media (min-width: 768px) {
+
+  / * Remover o preenchimento vantagem necessária para mobile * /
+  . Comercialização {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  / * Navbar posicionamento foo * /
+  . Navbar-wrapper {
+    margin-top: 20px;
+  }
+  / * A barra de navegação torna-se separado do topo, então arredondar os cantos * /
+  . Navbar-wrapper. Navbar {
+    border-radius: 4px;
+  }
+
+  / * Bump up tamanho do conteúdo carrossel * /
+  . Carrossel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  . Featurette-heading {
+    font-size: 50px;
+  }
+
+}
+
+@ Media (min-width: 992px) {
+  . Featurette-heading {
+    margin-top: 120px;
+  }
+}

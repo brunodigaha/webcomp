@@ -1,0 +1,4 @@
+banco.db
+*.pyc
+webcomp/settings_local.py
+webcomp/staticfiles
