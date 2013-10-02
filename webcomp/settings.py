@@ -14,7 +14,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+DATABASES= {
+    'default': dj_database_url.config()
+}
 
 
 
