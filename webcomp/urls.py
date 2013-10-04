@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^$',HomeClass.as_view(), name='home'),
     url(r'^sobre$',SobreClass.as_view(), name='sobre'),
     url(r'^contato$',ContatoClass.as_view(), name='contato'),
+    url(r'^analise$','core.views.analise', name='analise'),
+
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
