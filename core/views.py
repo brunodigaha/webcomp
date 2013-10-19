@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from ply import lex
 
@@ -40,17 +40,20 @@ def analise(request):
 	    'ID','NUMBER',
 	    'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
 	    'LPAREN','RPAREN',
+	    'BEGIN','END','DELIMITER',
+	    'AT',
 	    ] + list(reserved.values())
 
 	# Tokens
-
-	#t_BEGIN   = r'{'
-	#t_END     = r'}'
+	t_AT      = r'\:'
+	t_BEGIN   = r'\{'
+	t_END     = r'\}'
+	t_DELIMITER = r'\;'
 	t_PLUS    = r'\+'
 	t_MINUS   = r'-'
 	t_TIMES   = r'\*'
 	t_DIVIDE  = r'/'
-	t_EQUALS  = r'='
+	t_EQUALS  = r'='	
 	t_LPAREN  = r'\('
 	t_RPAREN  = r'\)'
 	#t_ID      = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -71,7 +74,9 @@ def analise(request):
 	    return t
 
 	# Ignored characters
-	t_ignore = " \t"
+	t_ignore = " \r"
+	#t_ignore = " \t"
+	
 
 	def t_COMMENT(t):
 	    r'\#.*'
@@ -91,9 +96,11 @@ def analise(request):
 		last_cr = 0
 	    column = (token.lexpos - last_cr) + 1
 	    return column
-	    
+	lerror=[]
 	def t_error(t):
-	    print("Illegal character '%s'" % t.value[0])
+	    #print("Illegal character '%s'" % t.value[0])
+	    lr=(t.value[0],t.lineno,t.lexpos)
+	    lerror.append(lr)
 	    t.lexer.skip(1)
 	    
 	lexer = lex.lex()
@@ -108,19 +115,16 @@ def analise(request):
 	'''for tok in lexer:
 	    #(tipo,valor,linha,posicaodocaractere)
 	    print tok'''
-	result= ""
+	
+	llex=[]
 	while 1:
 	    tok = lex.token()
 	    if not tok: break
-	    #arq = open('C:\Users\Bruno\Desktop\codigo em python\parser\Teste\entrada.txt', 'r')
-	    #texto = arq.readlines()
-	    #texto.append(tok)	    
-	    
-	    #arq.write(data)
-	    
-	    result= result+"<br> "+str(tok)
-	
 
-	context['codigo']=result
+	    lt=(tok.type,tok.value,tok.lineno,tok.lexpos)
+	    llex.append(lt)
+
+	context['llex']=tuple(llex)
+	context['lerror']=tuple(lerror)
 				
 	return render (request,template_name,context)

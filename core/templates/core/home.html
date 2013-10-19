@@ -4,19 +4,71 @@
 
       <div class="jumbotron">
         <h1>Trabalho de Compilador</h1>
-        <p class="lead">Será implementado um compilador usando python.</p>
+        <p class="lead">PseudoLinguagem</p>
         <div class="row">
             <div class="col-lg-6">
                 <form action="{% url 'analise' %}" method="post">
                     {% csrf_token %}
                     <textarea name="codigo" class="form-control" placeholder="digite aqui o codigo fonte" rows="10"></textarea><br>
-                    <p><button  class="btn btn-success" type="submit"  >Análize Léxica</button></p>
+                    <p><button  class="btn btn-success" type="submit"  >Análise Léxica</button></p>
                     
                 </form>
             </div>
 
             <div class="col-lg-6">
+                {% if  llex %}
 
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Lexema</th>
+                            <th>Linha</th>
+                            <th>Coluna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for tok in llex %}                   
+                    
+                        <tr class="success">
+                            <td>{{ tok.0 }}</td>
+                            <td>{{ tok.1 }}</td>
+                            <td>{{ tok.2 }}</td>
+                            <td>{{ tok.3 }}</td>
+                            <td></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                    
+                {% endif %}
+
+                {% if lerror %}
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Lexema</th>
+                            <th>Linha</th>
+                            <th>Coluna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for error in lerror %}                   
+                    
+                        <tr class="danger">
+                            <td>ERROR</td>
+                            <td>{{ error.0 }}</td>
+                            <td>{{ error.1 }}</td>
+                            <td>{{ error.2 }}</td>
+                            
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
             </div>
 
         </div>
@@ -25,31 +77,32 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
-          <h4>Tecnologia</h4>
-          <p>Paython</p>
 
-          <h4>Analise</h4>
-          <p>Sintática e Léxica</p>
+          <h3>Disciplina: Teoria de Compiladores</h3>
+          <p>O trabalho é parte avaliativa da disciplina Teoria de Compiladores do sétimo periodo do curso de Ciência da Computaçã do IFET Sul de Minas- Campus Muzambinho, orientada pela professora Aracele Garcia (M.Sc. Computer Science - UFSC.) </p>
 
-          <h4>Ferrramenta</h4>
-          <p>LEX/YACC</p>
+          <h3>Tecnologia Utilizadas</h3>
+          <p>Python 2.7</p>
+          <p>Django 1.5</p>
+          <p>PLY (Python Lex-Yacc) 3.4</p>
+          <p>GIT 1.8 + GitHub</p>
+          <p>Bootstrap 3</p>
+          <p>CSS 3</p>
+          <p>HTML 5</p>
+         
+          
         </div>
 
         <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h3>Desenvolvido por:</h3>
+          <p><a href="http://www.linkedin.com/profile/view?id=197943958&trk=nav_responsive_tab_profile">Bruno Alexandre de Souza</a></p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          <h3>Código Disponível:</h3>
+          <p> <a href="https://github.com/brucealex/webcomp" target="_blank">GitHub</a> </p>          
         </div>
       </div>
 
-      <div class="footer">
-        <p>&copy; Company 2013</p>
-      </div>
+     
 
 	
 {% endblock conteudo %}

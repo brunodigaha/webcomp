@@ -5,10 +5,62 @@
 	<div class="jumbotron">
 	    <div class="container">
 	        <h1>Analise</h1>
-	        <p>Resultado da analise lexica</p>
-	        {{ codigo|safe}}	        
+	        <p>Resultado da análise lexica:</p>
+	        	        
 	        <p>
+	        
+	        {% if  lerror %}
 	        	
+	        	<table class="table table-hover">
+	        		<thead>
+	        			<tr>
+	        				<th>Token</th>
+	        				<th>Lexema</th>
+	        				<th>Linha</th>
+	        				<th>Coluna</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        		{% for error in lerror %}        			
+	        		
+	        			<tr class="danger">
+	        				<td>ERROR</td>
+	        				<td>{{ error.0 }}</td>
+	        				<td>{{ error.1 }}</td>
+	        				<td>{{ error.2 }}</td>
+	        				
+	        			</tr>
+
+	        		{% endfor %}
+	        		</tbody>
+	        	</table>
+	        {% endif %}
+
+
+	        	<table class="table table-hover">
+	        		<thead>
+	        			<tr>
+	        				<th>Token</th>
+	        				<th>Lexema</th>
+	        				<th>Linha</th>
+	        				<th>Coluna</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        		{% for tok in llex %}        			
+	        		
+	        			<tr class="success">
+	        				<td>{{ tok.0 }}</td>
+	        				<td>{{ tok.1 }}</td>
+	        				<td>{{ tok.2 }}</td>
+	        				<td>{{ tok.3 }}</td>
+	        				<td></td>
+	        			</tr>
+
+	        		{% endfor %}
+	        		</tbody>
+	        	</table>
+
 	        </p>
 	    </div>
 	</div>
