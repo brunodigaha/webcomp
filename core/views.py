@@ -18,16 +18,17 @@ class ContatoClass(TemplateView):
 
 
 
-def analise(request):
+def analiselexica(request):
 
-	template_name = "core/analise.html"
+	template_name = "core/home.html"
 	context={}
 
-	if request.POST.get('codigo',''):			
-		codigo=request.POST.get('codigo','')		
-		
 
+	codigo=request.POST.get('codigo','')		
+	if codigo:
+		context['codigo']=codigo
 
+	print codigo
 
 
 	reserved = {

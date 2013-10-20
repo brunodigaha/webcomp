@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
+
+{% block js %}
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("textarea[name='codigo']").text("{{ codigo|escapejs }}");
+        });
+    </script>   
+    
+{% endblock js %}
+
 {% block conteudo %}
 
       <div class="jumbotron">
@@ -7,15 +21,45 @@
         <p class="lead">PseudoLinguagem</p>
         <div class="row">
             <div class="col-lg-6">
-                <form action="{% url 'analise' %}" method="post">
+            <br />
+           
+                <form action="{% url 'analiselexica' %}" method="post">
                     {% csrf_token %}
-                    <textarea name="codigo" class="form-control" placeholder="digite aqui o codigo fonte" rows="10"></textarea><br>
+                    <textarea id="fonte" name="codigo" class="form-control" placeholder="digite aqui o código fonte" rows="10"></textarea><br>
                     <p><button  class="btn btn-success" type="submit"  >Análise Léxica</button></p>
                     
                 </form>
             </div>
 
             <div class="col-lg-6">
+
+
+                {% if lerror %}
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Lexema</th>
+                            <th>Linha</th>
+                            <th>Coluna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for error in lerror %}                   
+                    
+                        <tr class="danger">
+                            <td>ERROR</td>
+                            <td>{{ error.0 }}</td>
+                            <td>{{ error.1 }}</td>
+                            <td>{{ error.2 }}</td>
+                            
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
                 {% if  llex %}
 
                     <table class="table table-hover">
@@ -44,31 +88,7 @@
                     
                 {% endif %}
 
-                {% if lerror %}
-                    <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Token</th>
-                            <th>Lexema</th>
-                            <th>Linha</th>
-                            <th>Coluna</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for error in lerror %}                   
-                    
-                        <tr class="danger">
-                            <td>ERROR</td>
-                            <td>{{ error.0 }}</td>
-                            <td>{{ error.1 }}</td>
-                            <td>{{ error.2 }}</td>
-                            
-                        </tr>
-
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
+               
             </div>
 
         </div>

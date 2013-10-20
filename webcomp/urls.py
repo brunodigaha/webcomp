@@ -21,10 +21,10 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$',HomeClass.as_view(), name='home'),
+    url(r'^$','core.views.analiselexica', name='analiselexica'),
     url(r'^sobre$',SobreClass.as_view(), name='sobre'),
     url(r'^contato$',ContatoClass.as_view(), name='contato'),
-    url(r'^analise$','core.views.analise', name='analise'),
+    #url(r'^analise$','core.views.analiselexica', name='analise'),
 
 )
 
