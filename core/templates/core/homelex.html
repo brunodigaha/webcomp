@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+
+    <script type="text/javascript">
+      $(".alert").alert('close')
+    </script>   
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function(){
+            $("textarea[name='codigo']").text("{{ codigo|escapejs }}");
+        });
+    </script>   
+    
+{% endblock js %}
+
+{% block conteudo %}
+
+
+      
+
+      <div class="jumbotron">
+        <h1>Trabalho de Compilador</h1><br />
+        <p class="lead">PseudoLinguagem.</p>
+        <div class="row">
+        {% if lerror %}
+  <div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>Erro Léxico</strong> >> corrija o erro e compile novamente
+</div>
+
+{% endif %}
+
+            <div class="col-lg-12">
+                        <p>[</p>
+            <p>a=2.5;</p>
+            <p>b=3.5;</p>
+            <p>c=2;</p>
+            <p>d=(a+b+c)/c;</p>
+            <p>print(d);</p>
+            <p>]</p>
+
+            <br />
+           
+                <form action="{% url 'lexica' %}" method="post">
+                    {% csrf_token %}
+                    <textarea id="fonte" name="codigo" class="form-control" placeholder="digite aqui o código fonte" rows="10"></textarea><br>
+                    <p><button  class="btn btn-success" type="submit"  >Análise Léxica</button></p>
+                    
+                </form>
+                <!-- Bootstrap core CSS 
+                <form "{% url 'analiselexica' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="codigosint"><br>
+                  <input type="submit" class="btn btn-success" value="Submit">
+                </form>
+                -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+
+                <h2>Análise léxica:</h2>
+                {% if lerror %}
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Erro</th>
+                            <th>Lexema</th>
+                            <th>Linha</th>
+                            <th>Coluna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for error in lerror %}                   
+                    
+                        <tr class="danger">
+                            <td>error lexema</td>
+                            <td>{{ error.0 }}</td>
+                            <td>{{ error.1 }}</td>
+                            <td>{{ error.2 }}</td>
+                            
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+                {% if  llex %}
+                  
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Lexema</th>
+                            <th>Linha</th>
+                            <th>Coluna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for tok in llex %}                   
+                    
+                        <tr class="success">
+                            <td>{{ tok.0 }}</td>
+                            <td>{{ tok.1 }}</td>
+                            <td>{{ tok.2 }}</td>
+                            <td>{{ tok.3 }}</td>
+                            <td></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                    
+                {% endif %}
+
+
+
+            </div>
+            <div class="col-lg-6">
+              {% if rsintatica %}
+              
+                <h2>Análise Sintática:</h2>
+              <br />
+              <div class="alert alert-success">
+
+                 <p>>>> {{ rsintatica.0}}</p>
+              </div>
+              {% endif %}
+                
+            </div>
+        </div>
+        
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+
+          <h3>Disciplina: Teoria de Compiladores</h3>
+          <p>O trabalho é parte avaliativa da disciplina Teoria de Compiladores do sétimo periodo do curso de Ciência da Computaçã do IFET Sul de Minas- Campus Muzambinho, orientada pela professora Aracele Garcia (M.Sc. Computer Science - UFSC.) </p>
+
+          <h3>Tecnologia Utilizadas</h3>
+          <p>Python 2.7</p>
+          <p>Django 1.5</p>
+          <p>PLY (Python Lex-Yacc) 3.4</p>
+          <p>GIT 1.8 + GitHub</p>
+          <p>Bootstrap 3</p>
+          <p>CSS 3</p>
+          <p>HTML 5</p>
+         
+          
+        </div>
+
+        <div class="col-lg-6">
+          <h3>Desenvolvido por:</h3>
+          <p><a href="http://www.linkedin.com/profile/view?id=197943958&trk=nav_responsive_tab_profile">Bruno Alexandre de Souza</a></p>
+
+          <h3>Código Disponível:</h3>
+          <p> <a href="https://github.com/brucealex/webcomp" target="_blank">GitHub</a> </p>          
+        </div>
+      </div>
+
+     
+
+	
+{% endblock conteudo %}

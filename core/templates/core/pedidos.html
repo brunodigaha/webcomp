@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+
+      <div class="jumbotron">
+        <h1>Cozinha</h1>
+        <p class="lead">Pedidos a serem entregues</p>
+        <div class="row">
+            <div class="col-lg-6">
+            <br />
+           
+                <form action="{% url 'pedidos' %}" method="get">
+                    
+                    <textarea id="fonte" name="pedido" class="form-control" placeholder="digite aqui o código fonte" rows="10"></textarea><br>
+                    <p><button  class="btn btn-success" type="submit"  >Análise Léxica</button></p>
+                    
+                </form>
+                pedidos : {{pedido}}
+            </div>
+      </div>
+
+{% endblock conteudo %}
